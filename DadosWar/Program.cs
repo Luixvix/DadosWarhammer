@@ -21,9 +21,9 @@ namespace DadosWar
                 Retry:  //Etiqueta para volver a empezar
 
                 Console.WriteLine("\n Introduce numero de dados:");
-                entrada = Console.ReadLine();
+                entrada = Console.ReadLine().ToLower();
 
-                if (entrada == "Quit" | entrada == "quit")//Comprobar fin de Programa
+                if (entrada.Equals("quit"))//Comprobar fin de Programa
                 {
                     break;
                 }

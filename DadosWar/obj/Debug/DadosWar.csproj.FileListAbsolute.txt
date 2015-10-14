@@ -7,3 +7,9 @@ c:\users\admvictor\documents\visual studio 2015\Projects\DadosWar\DadosWar\obj\D
 C:\Users\AdmVictor\Documents\GitHub\DadoWarhammer\DadosWar\bin\Debug\DadosWar.exe.config
 C:\Users\AdmVictor\Documents\GitHub\DadoWarhammer\DadosWar\obj\Debug\DadosWar.exe
 C:\Users\AdmVictor\Documents\GitHub\DadoWarhammer\DadosWar\obj\Debug\DadosWar.pdb
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\bin\Debug\DadosWar.exe.config
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\obj\Debug\DadosWar.exe
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\obj\Debug\DadosWar.pdb
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\bin\Debug\DadosWar.exe
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\bin\Debug\DadosWar.pdb
+C:\Users\Jorge\Documents\GitHub\DadosWarhammer\DadosWar\obj\Debug\DadosWar.csprojResolveAssemblyReference.cache
