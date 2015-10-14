@@ -12,9 +12,11 @@ namespace DadosWar
         {
             Console.WriteLine("\n Quit para salir");
 
+            #region variables
             string entrada;     //Datos Entrada
             int nDados = 0;       //Numero de dados para la tirada
             int tirada = 0;
+            #endregion
 
             while (true)        //Bucle Infinito
             {
