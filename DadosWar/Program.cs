@@ -18,46 +18,40 @@ namespace DadosWar
 
             while (true)        //Bucle Infinito
             {
-                Retry:  //Etiqueta para volver a empezar
-
-                Console.WriteLine("\n Introduce numero de dados:");
+                Console.WriteLine("\nIntroduce numero de dados: ");
                 // usando toLower() nos ahorramos codigo en el if para comprobar el quit
                 entrada = Console.ReadLine().ToLower();
 
+                #region check_dados
                 if (entrada.Equals("quit"))//Comprobar fin de Programa
                 {
                     break;
                 }
 
-                if (Int32.TryParse(entrada, out nDados))//Comprueba que entrada sea un numero entero
+                // comprueba que la entrada sea un número entero
+                while (Int32.TryParse(entrada, out nDados).Equals(false))
                 {
-                    Console.WriteLine("\n Son " + nDados + " dados");
+                    Console.WriteLine("\nNo has introducido un Numero Entero");
+                    entrada = Console.ReadLine();
                 }
-                else
-                {
-                    Console.WriteLine("\n No has introducido un Numero Entero");
-                    goto Retry;     //Empezar de nuevo
-                }
+                #endregion
 
-                TiradaSuperar:    //Continuamos con tirada
+                Console.WriteLine("\nEscribe la tirada a superar: ");
+                // usando toLower() nos ahorramos codigo en el if para comprobar el quit
+                entrada = Console.ReadLine().ToLower();
 
-                Console.WriteLine("\n Escribe tirada a superar:");
-                entrada = Console.ReadLine();
-
-                if (entrada == "Quit" | entrada == "quit")//Comprobar fin de Programa
+                #region check_tirada
+                if (entrada.Equals("quit"))//Comprobar fin de Programa
                 {
                     break;
                 }
-                if (Int32.TryParse(entrada, out tirada))//Comprueba que entrada sea un numero entero
-                {
-                    Console.WriteLine("\n La tirada es " + tirada);
-                    
-                }
-                else
+                // comprueba que la entrada sea un número entero
+                while (Int32.TryParse(entrada, out tirada).Equals(false))
                 {
                     Console.WriteLine("\n No has introducido un Numero Entero");
-                    goto TiradaSuperar;     //Empezar de nuevo
+                    entrada = Console.ReadLine();
                 }
+                #endregion
 
                 int[] tiradas = tiradaDados(nDados);
                 //mostrar(tiradas);
