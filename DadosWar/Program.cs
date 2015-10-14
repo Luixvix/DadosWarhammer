@@ -53,9 +53,11 @@ namespace DadosWar
                 }
                 #endregion
 
-                int[] tiradas = tiradaDados(nDados);
+                // se utiliza system.math.abs para convertir el posible valor negativo en positivo
+
+                int[] tiradas = tiradaDados(System.Math.Abs(nDados));
                 //mostrar(tiradas);
-                analizarTirada(tiradas, tirada);
+                analizarTirada(tiradas, System.Math.Abs(tirada));
 
                 Console.WriteLine("\n Fin Bucle");
                
