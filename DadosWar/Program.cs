@@ -8,6 +8,7 @@ namespace DadosWar
 {
     class Program
     {
+        #region Main
         static void Main(string[] args)
         {
             Console.WriteLine("\n Quit para salir");
@@ -59,7 +60,10 @@ namespace DadosWar
                 }
 
                 int[] tiradas = tiradaDados(nDados);
-                //mostrar(tiradas);
+               
+      
+
+
                 analizarTirada(tiradas, tirada);
 
                 Console.WriteLine("\n Fin Bucle");
@@ -67,7 +71,8 @@ namespace DadosWar
             }
         
         }
-        static int[] tiradaDados(int nDados)
+        #endregion
+        static int[] tiradaDados(int nDados) //Tirada de dados Con el random
         {
             int[] resultados = new int[nDados]; //Array para los resultados de los dados
             Random dado= new Random();          //Variable Random
@@ -80,7 +85,6 @@ namespace DadosWar
             return resultados;
         }
 
-
         static void mostrar(int[] resultados)//Metodo para mostrar las tiradas
         {
             for (int i = 0; i < resultados.Length; i++)
@@ -88,7 +92,6 @@ namespace DadosWar
                 Console.WriteLine("\n Resultado de la tirada " + (i+1)+ " es " + resultados[i]);
             }
         }
-
 
         static void analizarTirada(int[]tiradas, int tirada)//Metodo para analizar el numero de superados
         {
@@ -116,18 +119,37 @@ namespace DadosWar
             switch (entrada.ToLower())   //Selector de la respuesta, convierte mayusculas a minusculas
             {
                 case "s":               //Respuesta Afirmativa
-                    goto CriticosSi;
+                    Console.WriteLine("\n Criticos SI!!");
+                    criticos(tiradas);
+                    return;
                 case "n":               //Respuesta Negativa
+                    Console.WriteLine("\n Criticos NO!!");
                     return;
                 default:                //Cualquier caso no contemplado de respuesta
                     Console.WriteLine("\n Escribe una respuesta valida");
                     goto Criticos;      //Te devuelve al comienzo de la pregunta
             }
 
-            CriticosSi:
-            Console.WriteLine("\n Criticos SI!!");
         }
 
+        static void criticos(int[] tiradas) //Cuenta los 6's y los 1's
+        {
+            int seises = 0;
+            int unos = 0;
+            for (int i = 0; i < tiradas.Length; i++)
+            {
+                if (tiradas[i] == 6)
+                {
+                    seises++;
+                }
+                if (tiradas[i] == 1)
+                {
+                    unos++;
+                }
+            }
+            Console.WriteLine("\n Han salido " + seises + " seises");
+            Console.WriteLine("\n Han salido " + unos + " unos");
+        }
 
         static int superarTirada(int[] tiradas, int tirada) //Metodo para contar las tiradas superadas
         {
