@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace DadosWar
 {
     class Program
     {
+        private static readonly RNGCryptoServiceProvider random_generator = new RNGCryptoServiceProvider();
+
         static void Main(string[] args)
         {
             Console.WriteLine("\n Quit para salir");
@@ -63,18 +66,17 @@ namespace DadosWar
                 mostrar(tiradas);
 
                 Console.WriteLine("\n Fin Bucle");
-               
+
             }
-        
+
         }
         static int[] tiradaDados(int nDados)
         {
             int[] resultados = new int[nDados]; //Array para los resultados de los dados
-            Random dado= new Random();          //Variable Random
 
             for (int i = 0; i < nDados; i++)
             {
-                resultados[i] = dado.Next(1,6);//Dado toma un numero aleatorio de 1 a 6
+                resultados[i] = ValoresEntre(1, 6);
             }
 
             return resultados;
@@ -85,16 +87,16 @@ namespace DadosWar
         {
             for (int i = 0; i < resultados.Length; i++)
             {
-                Console.WriteLine("\n Resultado de la tirada " + (i+1)+ " es " + resultados[i]);
+                Console.WriteLine("\n Resultado de la tirada " + (i + 1) + " es " + resultados[i]);
             }
         }
 
 
-        static void analizarTirada(int[]tiradas, int tirada)//Metodo para analizar el numero de superados
+        static void analizarTirada(int[] tiradas, int tirada)//Metodo para analizar el numero de superados
         {
             string entrada;
             int res = 0;
-            if (tirada>0)       //Comprobamos si la tirada es "X o mas" o es "X o menos"
+            if (tirada > 0)       //Comprobamos si la tirada es "X o mas" o es "X o menos"
             {
                 Console.WriteLine("\n La tirada tiene que ser superior a " + tirada);
                 res = superarTirada(tiradas, tirada);   //Resultado de la tirada, numero de aciertos
@@ -104,11 +106,11 @@ namespace DadosWar
             {
                 int tiradaNeg = 1 - tirada; //La tirada de "X o menos" (-X) es igual a los fallos de "(1- (-X)) o mas"
                 Console.WriteLine("\n La tirada tiene que ser menor a " + tiradaNeg);
-                res = tiradas.Length -superarTirada(tiradas, tiradaNeg);//Resultado de la tirada, numero de aciertos
+                res = tiradas.Length - superarTirada(tiradas, tiradaNeg);//Resultado de la tirada, numero de aciertos
                 Console.WriteLine("\n Han superado las tiradas " + res + " Dados");
             }
 
-            Criticos:
+        Criticos:
 
             Console.WriteLine("\n ¿Quieres buscar Criticos? Responde S o N");//Recuento de 6 y 1 en la tirada
             entrada = Console.ReadLine();
@@ -124,7 +126,7 @@ namespace DadosWar
                     goto Criticos;      //Te devuelve al comienzo de la pregunta
             }
 
-            CriticosSi:
+        CriticosSi:
             Console.WriteLine("\n Criticos SI!!");
         }
 
@@ -141,6 +143,28 @@ namespace DadosWar
                 }
             }
             return superadas;
+        }
+
+
+        public static int ValoresEntre(int minimumValue, int maximumValue)
+        {
+            byte[] randomNumber = new byte[1];
+
+            random_generator.GetBytes(randomNumber);
+
+            double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
+
+            // We are using Math.Max, and substracting 0.00000000001, 
+            // to ensure "multiplier" will always be between 0.0 and .99999999999
+            // Otherwise, it's possible for it to be "1", which causes problems in our rounding.
+            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255d) - 0.00000000001d);
+
+            // We need to add one to the range, to allow for the rounding done with Math.Floor
+            int range = maximumValue - minimumValue + 1;
+
+            double randomValueInRange = Math.Floor(multiplier * range);
+
+            return (int)(minimumValue + randomValueInRange);
         }
     }
 }
