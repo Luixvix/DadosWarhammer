@@ -62,7 +62,9 @@ namespace DadosWar
 
                 int[] tiradas = tiradaDados(System.Math.Abs(nDados));
 
-                analizarTirada(tiradas, System.Math.Abs(tirada));
+                // corregido "tirada", que al ser antes un valor absoluto inutilizaba la función de
+                // sacar menos que.
+                analizarTirada(tiradas, tirada);
                 mostrar(tiradas);
 
                 Console.WriteLine("\n Fin Bucle");
@@ -98,14 +100,16 @@ namespace DadosWar
             int res = 0;
             if (tirada > 0)       //Comprobamos si la tirada es "X o mas" o es "X o menos"
             {
-                Console.WriteLine("\n La tirada tiene que ser superior a " + tirada);
+                Console.WriteLine("\n La tirada tiene que ser " + tirada +"+");
                 res = superarTirada(tiradas, tirada);   //Resultado de la tirada, numero de aciertos
                 Console.WriteLine("\n Han superado las tiradas " + res + " Dados");
             }
             else
             {
-                int tiradaNeg = 1 - tirada; //La tirada de "X o menos" (-X) es igual a los fallos de "(1- (-X)) o mas"
-                Console.WriteLine("\n La tirada tiene que ser menor a " + tiradaNeg);
+                // corregido un fallo por el cual si metías "-x" te decía que tenía que ser menor a "x+1" cuando
+                // debería ser menor a "x"
+                int tiradaNeg = System.Math.Abs(tirada); //La tirada de "X o menos" (-X) es igual a los fallos de "(1- (-X)) o mas"
+                Console.WriteLine("\n La tirada tiene que ser " + tiradaNeg+" o menos");
                 res = tiradas.Length - superarTirada(tiradas, tiradaNeg);//Resultado de la tirada, numero de aciertos
                 Console.WriteLine("\n Han superado las tiradas " + res + " Dados");
             }
@@ -130,7 +134,9 @@ namespace DadosWar
             Console.WriteLine("\n Criticos SI!!");
         }
 
-
+        // revisar la función para cuando tiene que ser "x o menos", porque si tiene que ser 5 o menos, 
+        // saldrá que superadas = 2, por lo que en realidad res = 6 - 2 = 4 (1, 2, 3, 4) cuando deberían
+        // ser 5 (1, 2, 3, 4, 5)
         static int superarTirada(int[] tiradas, int tirada) //Metodo para contar las tiradas superadas
         {
             int superadas = 0;
